@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - image: laravel-app-nginx
+        name: nginx
+        ports:
+          - containerPort: 80
+      - image: laravel-app-php
+        name: php
+        envFrom:
+          - secretRef:
+              name: laravelapp-secret
