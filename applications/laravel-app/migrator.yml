@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: laravel-app-migrator
+spec:
+  template:
+    spec:
+      containers:
+        - name: php
+          image: laravel-app-php
+          command: ["php",  "artisan", "migrate", "--force"]
+          envFrom:
+            - secretRef:
+                name: laravelapp-secret
+      restartPolicy: Never
+  backoffLimit: 1

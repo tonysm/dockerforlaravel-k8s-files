@@ -6,6 +6,7 @@ resources:
   - applications/redis-01/pvc.yml
   - applications/redis-01/svc.yml
   - applications/redis-01/statefulset.yml
+  - applications/laravel-app/migrator.yml
   - applications/laravel-app/web.yml
   - applications/laravel-app/svc.yml
   - applications/laravel-app/worker.yml
