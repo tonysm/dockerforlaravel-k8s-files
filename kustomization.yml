@@ -24,5 +24,6 @@ images:
   newTag: 0.0.5
 
 secretGenerator:
-- name: laravelapp-secret
-  env: .env
+- envs:
+  - .env
+  name: laravelapp-secret
