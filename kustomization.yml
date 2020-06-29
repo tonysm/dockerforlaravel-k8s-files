@@ -1,25 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 namespace: docker4laravel
 
 resources:
-  - applications/namespace.yml
-  - applications/main-ingress.yml
-  - applications/redis-01/pvc.yml
-  - applications/redis-01/svc.yml
-  - applications/redis-01/statefulset.yml
-  - applications/laravel-app/migrator.yml
-  - applications/laravel-app/web.yml
-  - applications/laravel-app/svc.yml
-  - applications/laravel-app/worker.yml
-  - applications/laravel-app/scheduler.yml
+- applications/namespace.yml
+- applications/main-ingress.yml
+- applications/redis-01/pvc.yml
+- applications/redis-01/svc.yml
+- applications/redis-01/statefulset.yml
+- applications/laravel-app/migrator.yml
+- applications/laravel-app/web.yml
+- applications/laravel-app/svc.yml
+- applications/laravel-app/worker.yml
+- applications/laravel-app/scheduler.yml
 
 images:
-  - name: laravel-app-nginx
-    newName: tonysm/docker4laravelapp-nginx
-    newTag: "0.0.5"
-  - name: laravel-app-php
-    newName: tonysm/docker4laravelapp-php
-    newTag: "0.0.5"
+- name: laravel-app-nginx
+  newName: tonysm/docker4laravelapp-nginx
+  newTag: 0.0.5
+- name: laravel-app-php
+  newName: tonysm/docker4laravelapp-php
+  newTag: 0.0.5
 
 secretGenerator:
-  - name: laravelapp-secret
-    env: .env
+- name: laravelapp-secret
+  env: .env
