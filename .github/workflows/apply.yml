@@ -1,0 +1,33 @@
+name: Apply the changes to Kubernetes
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Patch Infrastructure Manifests
+        env:
+          K8S_CLUSTER_ID: ${{ secrets.K8S_CLUSTER_ID }}
+        run: |
+          # Installs the kubectl CLI tool.
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+
+          # Installs Kustomize.
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          chmod +x ./kustomize && sudo mv ./kustomize /usr/local/bin/kustomize
+
+          # Save the kubeconfig to connect our kubectl to our cluster.
+          doctl kubernetes cluster kubeconfig save ${K8S_CLUSTER_ID}
+
+          # Deploy!
+          ./deploy.sh
