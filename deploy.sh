@@ -7,5 +7,3 @@ if kubectl get job/laravel-app-migrator -n docker4laravel; then
 fi
 
 kustomize build | kubectl apply -f -
-
-kubectl wait --for=condition=complete --timeout=30s job/laravel-app-migrator -n docker4laravel
