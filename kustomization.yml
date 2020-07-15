@@ -15,12 +15,14 @@ resources:
 images:
 - name: laravel-app-nginx
   newName: tonysm/docker4laravelapp-nginx
-  newTag: 92b53dd
+  newTag: 9aa3794
 - name: laravel-app-php
   newName: tonysm/docker4laravelapp-php
-  newTag: 92b53dd
+  newTag: 9aa3794
 
 secretGenerator:
 - envs:
   - .env
   name: laravelapp-secret
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
