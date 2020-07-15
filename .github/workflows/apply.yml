@@ -33,7 +33,7 @@ jobs:
           doctl kubernetes cluster kubeconfig save ${K8S_CLUSTER_ID}
 
           # Create the Laravel app secret file.
-          echo ${LARAVEL_APP_SECRET} > .env
+          cat $LARAVEL_APP_SECRET > .env
 
           # Deploy!
           ./deploy.sh
