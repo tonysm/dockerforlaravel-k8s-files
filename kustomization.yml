@@ -1,3 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 namespace: docker4laravel
 
 resources:
@@ -21,5 +24,6 @@ images:
   newTag: 0.0.5
 
 secretGenerator:
-- env: .env
+- envs:
+  - .env
   name: laravelapp-secret
