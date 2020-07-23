@@ -18,10 +18,10 @@ resources:
 images:
 - name: laravel-app-nginx
   newName: tonysm/docker4laravelapp-nginx
-  newTag: 0.0.5
+  newTag: 732de17
 - name: laravel-app-php
   newName: tonysm/docker4laravelapp-php
-  newTag: 0.0.5
+  newTag: 732de17
 
 secretGenerator:
 - envs:
